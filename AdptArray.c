@@ -14,6 +14,10 @@ typedef struct AdptArray_
 
 PAdptArray CreateAdptArray(COPY_FUNC copy, DEL_FUNC delete,PRINT_FUNC print)
 {
+    if (copy==NULL || delete==NULL || print==NULL)
+    {
+        return NULL;
+    }
     PAdptArray paa = (PAdptArray) malloc(sizeof(AdptArray));
     if (!paa) 
     {
@@ -26,6 +30,7 @@ PAdptArray CreateAdptArray(COPY_FUNC copy, DEL_FUNC delete,PRINT_FUNC print)
         free(paa);
         return NULL;
     }
+    
     paa->pElemArr=pElemArr;
     paa->delete_function = delete;
     paa->copy_function = copy;
