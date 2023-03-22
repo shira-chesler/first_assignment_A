@@ -65,7 +65,6 @@ Result SetAdptArrayAt(PAdptArray paa, int idx, PElement p_new_e)
     int arr_size = paa->ArrSize;
     if (idx >= arr_size)
     {
-        PElement* new_arr;
         PElement* new_arr = (PElement*) calloc((idx + 1), sizeof(PElement));
         if (!new_arr)
         {
