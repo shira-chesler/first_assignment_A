@@ -23,14 +23,8 @@ PAdptArray CreateAdptArray(COPY_FUNC copy, DEL_FUNC delete,PRINT_FUNC print)
     {
         return NULL;
     }
-    paa->ArrSize=1;
-    PElement* pElemArr =(PElement*) calloc(1, sizeof(PElement));
-    if(!pElemArr)
-    {
-        free(paa);
-        return NULL;
-    }
-    
+    paa->ArrSize=0;
+    PElement* pElemArr=NULL;
     paa->pElemArr=pElemArr;
     paa->delete_function = delete;
     paa->copy_function = copy;
@@ -71,6 +65,7 @@ Result SetAdptArrayAt(PAdptArray paa, int idx, PElement p_new_e)
     int arr_size = paa->ArrSize;
     if (idx >= arr_size)
     {
+        PElement* new_arr;
         PElement* new_arr = (PElement*) calloc((idx + 1), sizeof(PElement));
         if (!new_arr)
         {
@@ -80,9 +75,6 @@ Result SetAdptArrayAt(PAdptArray paa, int idx, PElement p_new_e)
         {
             new_arr[i] = paa->pElemArr[i];
         }
-        //for (int i = arr_size; i < idx+1 ; ++i) {
-            //new_arr[i] = NULL;
-        //}
         free(paa->pElemArr);
         paa->pElemArr = new_arr;
     }
@@ -99,7 +91,7 @@ Result SetAdptArrayAt(PAdptArray paa, int idx, PElement p_new_e)
 }
 PElement GetAdptArrayAt(PAdptArray paa, int idx)
 {
-    if(paa==NULL || idx>paa->ArrSize-1 || idx < 0)
+    if(paa==NULL || paa->pElemArr==NULL || idx>paa->ArrSize-1 || idx < 0)
     {
         return NULL;
     } 
