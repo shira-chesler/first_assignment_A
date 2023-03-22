@@ -110,7 +110,7 @@ int GetAdptArraySize(PAdptArray paa)
 {
     if(!paa)
     {
-        return 0;
+        return -1;
     }
     return paa->ArrSize;
 }
